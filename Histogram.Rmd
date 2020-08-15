@@ -1,0 +1,62 @@
+---
+title: "Histogram"
+author: "DavidC"
+date: "8/15/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+library(mosaic)
+library(tidyverse)
+library(ggplot2)
+
+data(mpg)
+mpg
+head(mpg)
+
+
+# R's basic plotting commands
+
+hist(mpg$cty)
+hist(mpg$cty, breaks=20)
+
+plot(mpg$displ, mpg$hwy)
+plot(hwy ~ displ, data=mpg)  # works if you've loaded mosaic
+
+boxplot(cty~class, data=mpg)
+
+
+# Pros: simple syntax
+# Cons: not that pretty, and very hard to do complex things
+
+# We'll use ggplot2 instead
+# Cons: commands are less intuitive at first
+# Pros: much easier to make sophisticated, beautiful plots
+
+# creating a ggplot
+# The first line sets up a coordinate system.
+# the second line maps displ to x, hwy to y, and draws points
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy))
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
